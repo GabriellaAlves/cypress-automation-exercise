@@ -1,0 +1,57 @@
+```yaml
+name: Cypress Automation UI E2E Tests
+
+on:
+  push:
+    branches: [main, master]
+
+  pull_request:
+
+  workflow_dispatch:
+
+  schedule:
+    - cron: '0 9 * * 1-5'
+
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Cypress UI tests
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          browser: chrome
+        env:
+          CYPRESS_USER_EMAIL: ${{ secrets.CYPRESS_USER_EMAIL }}
+          CYPRESS_USER_PASSWORD: ${{ secrets.CYPRESS_USER_PASSWORD }}
+          CYPRESS_LOGOUT_EMAIL: ${{ secrets.CYPRESS_LOGOUT_EMAIL }}
+          CYPRESS_LOGOUT_PASSWORD: ${{ secrets.CYPRESS_LOGOUT_PASSWORD }}
+          CYPRESS_CHECKOUT_EMAIL: ${{ secrets.CYPRESS_CHECKOUT_EMAIL }}
+          CYPRESS_CHECKOUT_PASSWORD: ${{ secrets.CYPRESS_CHECKOUT_PASSWORD }}
+
+      - name: Upload Mochawesome reports and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-report-${{ github.run_number }}
+          path: |
+            cypress/reports/
+            cypress/screenshots/
+            cypress/videos/
+          if-no-files-found: warn
+          retention-days: 14
+```

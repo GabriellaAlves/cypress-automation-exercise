@@ -1,0 +1,27 @@
+{
+  "registration": {
+    "namePrefix": "Cypress User",
+    "password": "Test@12345",
+    "title": "Mr",
+    "birthDay": "10",
+    "birthMonth": "5",
+    "birthYear": "1995",
+    "firstName": "Cypress",
+    "lastName": "Automation",
+    "company": "Example QA",
+    "address": "123 Test Street",
+    "address2": "Apartment 4",
+    "country": "United States",
+    "state": "California",
+    "city": "Los Angeles",
+    "zipcode": "90001",
+    "mobile": "1234567890"
+  },
+  "invalidLogin": {
+    "email": "invalid-user-123456@example.com",
+    "password": "WrongPassword!123"
+  },
+  "subscription": {
+    "email": "subscription-cypress@example.com"
+  }
+}

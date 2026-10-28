@@ -1,7 +1,19 @@
+# Dependências
 node_modules/
+
+# Artefatos do Cypress
 cypress/videos/
 cypress/screenshots/
-cypress/reports/**
+
+# Relatórios do Mochawesome
+cypress/reports/*
 !cypress/reports/.gitkeep
-.env
+
+# Arquivos do macOS
 .DS_Store
+**/.DS_Store
+
+# Variáveis de ambiente
+.env
+.env.*
+!.env.example
